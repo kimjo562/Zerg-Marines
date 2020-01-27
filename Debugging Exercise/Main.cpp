@@ -29,8 +29,8 @@ int main()
 	vector<Marine> squad;
 	vector<Zergling> swarm;
 
-	int squadSize = 10;
-	int swarmSize = 20;
+	int squadSize = 9;
+	int swarmSize = 8;
 
 	// Set up the Squad and the Swarm at their initial sizes listed above
 
@@ -55,6 +55,10 @@ int main()
 		{
 			for (size_t i = 0; i < squadSize; i++) // go through the squad
 			{
+				if (swarm.size() == 0)
+				{
+					break;
+				}
 				// each marine will attack the first zergling in the swarm
 				cout << "A marine fires for " << squad[i].attack() << " damage. " << endl;
 				int damage = squad[i].attack();
@@ -62,14 +66,19 @@ int main()
 				if (!swarm[0].isAlive()) // if the zergling dies, it is removed from the swarm
 				{
 					cout << "The zergling target dies" << endl;
-					swarm.erase(swarm.begin());
+						swarm.erase(swarm.begin());
 				}
 			}
 		}
+
 		if (zerglingAlive(swarm)) // if there's at least one zergling alive
 		{
 			for (vector<Zergling>::iterator i = swarm.begin(); i != swarm.end(); ++i) // loop through zerglings
 			{
+				if (squad.size() == 0)
+				{
+					break;
+				}
 				cout << "A zergling attacks for " << i->attack() << " damage." << endl;
 				squad.begin()->takeDamage(i->attack());
 				if (!squad.begin()->isAlive())
@@ -85,7 +94,7 @@ int main()
 	cout << "The fight is over. ";
 	if (marineAlive(squad))
 	{
-		cout << "The Marines win." << endl;
+		cout << "The Terran win." << endl;
 	} 
 	else 
 	{
