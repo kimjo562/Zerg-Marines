@@ -3,9 +3,8 @@
 
 Marine::Marine()
 {
-	health = 50;
+	health = 45;
 }
-
 
 Marine::~Marine()
 {
@@ -13,10 +12,14 @@ Marine::~Marine()
 
 int Marine::attack()
 {
-	return 10;
+	return 6;
 }
 
 void Marine::takeDamage(int damage)
 {
 	health -= damage;
+	if (health < 0)
+	{
+		health = 0;
+	}
 }

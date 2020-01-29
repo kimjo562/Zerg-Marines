@@ -29,20 +29,22 @@ int main()
 	vector<Marine> squad;
 	vector<Zergling> swarm;
 
-	int squadSize = 9;
-	int swarmSize = 8;
+	int squadSize = 8;
+	int swarmSize = 12;
 
 	// Set up the Squad and the Swarm at their initial sizes listed above
 
-	Marine m;
+
 	for (size_t i = 0; i < squadSize; i++)
 	{
+		Marine m;
 		squad.push_back(m);
 	}
 
-	Zergling z;
+
 	for (size_t i = 0; i < swarmSize; i++)
 	{
+		Zergling z;
 		swarm.push_back(z);
 	}
 
@@ -53,7 +55,7 @@ int main()
 	{
 		if (marineAlive(squad)) // if there's at least one marine alive
 		{
-			for (size_t i = 0; i < squadSize; i++) // go through the squad
+			for (size_t i = 0; i < squad.size(); i++) // go through the squad
 			{
 				if (swarm.size() == 0)
 				{
@@ -73,18 +75,19 @@ int main()
 
 		if (zerglingAlive(swarm)) // if there's at least one zergling alive
 		{
-			for (vector<Zergling>::iterator i = swarm.begin(); i != swarm.end(); ++i) // loop through zerglings
+			for (vector<Zergling>::iterator i = swarm.begin(); i != swarm.end(); i++) // loop through zerglings
 			{
 				if (squad.size() == 0)
 				{
 					break;
 				}
-				cout << "A zergling attacks for " << i->attack() << " damage." << endl;
+				// each zergling will attack
+				cout << "A zergling attacks for " << i->attack() << " damage." << endl;				
 				squad.begin()->takeDamage(i->attack());
 				if (!squad.begin()->isAlive())
 				{
-					squad.erase(squad.begin());
 					cout << "The marine succumbs to his wounds." << endl;
+					squad.erase(squad.begin());
 				}
 			}
 		}
